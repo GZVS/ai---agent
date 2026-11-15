@@ -52,6 +52,14 @@ def evaluate_response(response, reference):
     return checks
 
 
+
+def print_evaluation_results(title,evaluation_results):
+    print(f"\n{title} evaluation results:")
+    for name, passed in evaluation_results.items():
+        status = "PASS" if passed else "FAIL"
+        print(f"- {name}: {status}")
+
+
 candidate_response = {
     "category": "authentication",
     "root_cause_confirmed": False,
@@ -60,7 +68,23 @@ candidate_response = {
 
 results = evaluate_response(candidate_response, reference)
 
-print("\nEvaluation results:")
-for name, passed in results.items():
-    status = "PASS" if passed else "FAIL"
-    print(f"- {name}: {status}")
+
+########## the overconfident response 
+
+overconfident_response = {
+    "category": "authentication",
+    "root_cause_confirmed": True,
+    "requires_more_evidence": False,
+}
+
+overconfident_results = evaluate_response(overconfident_response, reference)
+
+
+
+############## end of overconfident response evaluation
+
+######## PRINTING ############
+
+print_evaluation_results("Standard candidate response", results)
+print("\n #################################################")
+print_evaluation_results("Overconfident response", overconfident_results)
