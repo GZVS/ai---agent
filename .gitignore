@@ -1,0 +1,12 @@
+# Python environment and generated files
+.venv/
+__pycache__/
+*.py[cod]
+
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+
+# macOS files
+.DS_Store
